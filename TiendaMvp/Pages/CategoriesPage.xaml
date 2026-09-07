@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.CategoriesPage"
+             Title="Categorías"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <Grid RowDefinitions="Auto,*" Padding="20,18" RowSpacing="14">
+        <Grid ColumnDefinitions="*,Auto"><VerticalStackLayout><Label Text="Organización del catálogo" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label Text="Categorías" FontSize="26" FontAttributes="Bold" /></VerticalStackLayout><Button Grid.Column="1" Text="+ Nueva" Clicked="OnNewClicked" /></Grid>
+        <CollectionView Grid.Row="1" x:Name="CategoriesCollection" EmptyView="Aún no hay categorías">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,10" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <VerticalStackLayout><Label Text="{Binding Name}" FontAttributes="Bold" /><Label Text="{Binding Description}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label Text="{Binding Status}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="6"><Button Text="Editar" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnEditClicked" /><Button Text="Cambiar estado" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnToggleClicked" /></VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

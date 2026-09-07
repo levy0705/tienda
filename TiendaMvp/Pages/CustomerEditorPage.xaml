@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.CustomerEditorPage"
+             Title="Cliente"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label x:Name="PageTitle" Text="Nuevo cliente" FontSize="26" FontAttributes="Bold" />
+            <Label Text="Nombre *" FontSize="13" /><Entry x:Name="NameEntry" Placeholder="Nombre completo o razón social" />
+            <Label Text="Documento" FontSize="13" /><Entry x:Name="DocumentEntry" Placeholder="Cédula, NIT o documento" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <VerticalStackLayout><Label Text="Teléfono" FontSize="13" /><Entry x:Name="PhoneEntry" Keyboard="Telephone" /></VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1"><Label Text="Límite de crédito (0 = sin límite)" FontSize="13" /><Entry x:Name="CreditLimitEntry" Keyboard="Numeric" Text="0" /></VerticalStackLayout>
+            </Grid>
+            <Label Text="Dirección" FontSize="13" /><Entry x:Name="AddressEntry" />
+            <Label Text="Notas" FontSize="13" /><Editor x:Name="NotesEditor" AutoSize="TextChanges" MinimumHeightRequest="90" />
+            <Button Text="Guardar cliente" Clicked="OnSaveClicked" />
+            <Button x:Name="ToggleButton" Text="Bloquear cliente" Clicked="OnToggleClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#B42318, Dark=#FF8A80}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

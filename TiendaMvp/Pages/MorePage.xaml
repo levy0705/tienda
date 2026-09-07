@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.MorePage"
+             Title="Más"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label Text="Administración" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Label Text="Más opciones" FontSize="26" FontAttributes="Bold" Margin="0,0,0,8" />
+            <Label x:Name="CurrentUserLabel" Text="Sesión activa" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Button Text="Compras" Clicked="OnPurchasesClicked" />
+            <Button Text="Proveedores" Clicked="OnSuppliersClicked" />
+            <Button Text="Clientes y créditos" Clicked="OnCustomersClicked" />
+            <Button Text="Créditos pendientes" Clicked="OnCreditsClicked" />
+            <Button Text="Historial de ventas" Clicked="OnSalesHistoryClicked" />
+            <Button Text="Gastos" Clicked="OnExpensesClicked" />
+            <Button Text="Reportes" Clicked="OnReportsClicked" />
+            <Button Text="Usuarios y permisos" Clicked="OnUsersClicked" />
+            <Button Text="Cambiar usuario" Clicked="OnSwitchUserClicked" />
+            <Button Text="Configuración de la tienda" Clicked="OnComingSoonClicked" />
+            <Button Text="Copias de seguridad" Clicked="OnBackupsClicked" />
+            <Border Padding="14" Margin="0,12,0,0" BackgroundColor="{AppThemeBinding Light=#E9EDF0, Dark=#202A2F}" StrokeThickness="0" StrokeShape="RoundRectangle 16"><VerticalStackLayout Spacing="4"><Label Text="Modo local" FontAttributes="Bold" /><Label Text="Los datos se guardan en este teléfono. La sincronización se añadirá más adelante." FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></VerticalStackLayout></Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

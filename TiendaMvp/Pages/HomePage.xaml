@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.HomePage"
+             Title="Inicio"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="16">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <VerticalStackLayout>
+                    <Label Text="Mi tienda" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                    <Label Text="Resumen del día" FontSize="26" FontAttributes="Bold" />
+                </VerticalStackLayout>
+                <Border Grid.Column="1" Padding="10,7" BackgroundColor="{AppThemeBinding Light=#E4F4ED, Dark=#183629}" StrokeThickness="0" StrokeShape="RoundRectangle 12">
+                    <Label Text="Local" FontSize="12" TextColor="{AppThemeBinding Light=#237A54, Dark=#8DE0B5}" />
+                </Border>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                <Border Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Ventas del día" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="SalesTodayLabel" Text="$0" FontSize="21" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Cobros recibidos" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="CollectionsTodayLabel" Text="$0" FontSize="21" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Gastos del día" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="ExpensesTodayLabel" Text="$0" FontSize="21" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Efectivo esperado" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="CashTodayLabel" Text="$0" FontSize="21" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="2" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Créditos pendientes" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="ReceivablesLabel" Text="$0" FontSize="21" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Productos agotados" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="OutOfStockLabel" Text="0" FontSize="21" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border x:Name="BackupReminderBorder" Padding="14" IsVisible="False" BackgroundColor="{AppThemeBinding Light=#FFF3D9, Dark=#3C3018}" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <VerticalStackLayout Spacing="3"><Label Text="Protege la información de tu tienda" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#815B00, Dark=#F6D889}" /><Label x:Name="BackupReminderLabel" Text="Crea y comparte un respaldo fuera del teléfono." FontSize="12" TextColor="{AppThemeBinding Light=#815B00, Dark=#F6D889}" /></VerticalStackLayout>
+                    <Button Grid.Column="1" Text="Respaldar" Clicked="OnBackupsClicked" Padding="12,6" BackgroundColor="{AppThemeBinding Light=#815B00, Dark=#F6D889}" TextColor="{AppThemeBinding Light=White, Dark=#3C3018}" />
+                </Grid>
+            </Border>
+
+            <Label Text="Acciones rápidas" FontSize="17" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="8">
+                <Button Text="Nueva venta" Clicked="OnNewSaleClicked" />
+                <Button Grid.Column="1" Text="Abrir caja" Clicked="OnOpenCashClicked" BackgroundColor="{AppThemeBinding Light=#E4F4ED, Dark=#183629}" TextColor="{AppThemeBinding Light=#237A54, Dark=#8DE0B5}" />
+                <Button Grid.Row="1" Text="Inventario" Clicked="OnInventoryClicked" />
+                <Button Grid.Row="1" Grid.Column="1" Text="Ver reportes" Clicked="OnReportsClicked" />
+            </Grid>
+
+            <Label Text="Atención" FontSize="17" FontAttributes="Bold" />
+            <Border Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto"><VerticalStackLayout><Label Text="Existencias bajas" FontAttributes="Bold" /><Label x:Name="LowStockSummary" Text="Aún no hay productos registrados" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></VerticalStackLayout><Label Grid.Column="1" x:Name="LowStockCount" Text="0" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></Grid>
+                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light=#E7ECEE, Dark=#344149}" />
+                    <Grid ColumnDefinitions="*,Auto"><VerticalStackLayout><Label Text="Créditos vencidos" FontAttributes="Bold" /><Label x:Name="OverdueSummary" Text="No hay créditos pendientes" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></VerticalStackLayout><Label Grid.Column="1" x:Name="OverdueCount" Text="0" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Productos más vendidos hoy" FontSize="17" FontAttributes="Bold" />
+            <CollectionView x:Name="TopProductsCollection" HeightRequest="210" EmptyView="Aún no hay ventas hoy">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,Auto" Padding="0,5">
+                            <VerticalStackLayout><Label Text="{Binding Label}" FontAttributes="Bold" /><Label Text="{Binding Detail}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></VerticalStackLayout>
+                            <Label Grid.Column="1" Text="{Binding Quantity, StringFormat='{0:0.##}'}" FontAttributes="Bold" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

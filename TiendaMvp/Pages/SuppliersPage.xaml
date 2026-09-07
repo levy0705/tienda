@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.SuppliersPage"
+             Title="Proveedores"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20,18" RowSpacing="12">
+        <Grid ColumnDefinitions="*,Auto">
+            <VerticalStackLayout>
+                <Label Text="Abastecimiento" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                <Label Text="Proveedores" FontSize="26" FontAttributes="Bold" />
+            </VerticalStackLayout>
+            <Button Grid.Column="1" Text="+ Proveedor" Clicked="OnNewClicked" />
+        </Grid>
+        <SearchBar Grid.Row="1" x:Name="SearchBox" Placeholder="Buscar por nombre, identificación o teléfono" TextChanged="OnSearchChanged" />
+        <CollectionView Grid.Row="2" x:Name="SuppliersCollection" EmptyView="No hay proveedores que mostrar">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,10" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <VerticalStackLayout Spacing="3">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" MaxLines="1" />
+                                <Label Text="{Binding TaxId, StringFormat='ID fiscal: {0}'}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                                <Label Text="{Binding Phone, StringFormat='Contacto: {0}'}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="8" Margin="0,4,0,0">
+                                    <Label Text="{Binding PurchaseCount, StringFormat='Compras: {0}'}" FontSize="13" />
+                                    <Label Grid.Column="1" Text="{Binding RelatedProductCount, StringFormat='Productos: {0}'}" FontSize="13" HorizontalTextAlignment="End" />
+                                </Grid>
+                                <Label Text="{Binding BalanceDue, StringFormat='Saldo pendiente: ${0:N0}'}" FontSize="13" HorizontalTextAlignment="End" />
+                                <Label Text="{Binding RelatedProductNames, StringFormat='Relacionados: {0}'}" FontSize="12" LineBreakMode="TailTruncation" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                                <Label Text="{Binding Status}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Button Text="Editar" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnEditClicked" />
+                                <Button Text="Compras" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnPurchasesClicked" />
+                                <Button Text="Cambiar estado" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnToggleClicked" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

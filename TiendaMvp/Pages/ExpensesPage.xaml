@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.ExpensesPage"
+             Title="Gastos"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20,18" RowSpacing="12">
+        <Grid ColumnDefinitions="*,Auto">
+            <VerticalStackLayout>
+                <Label Text="Caja y operación" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                <Label Text="Gastos" FontSize="26" FontAttributes="Bold" />
+            </VerticalStackLayout>
+            <Button Grid.Column="1" Text="+ Registrar" Clicked="OnAddClicked" VerticalOptions="Center" />
+        </Grid>
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="8">
+            <SearchBar x:Name="SearchBar" Placeholder="Buscar concepto o categoría" TextChanged="OnFilterChanged" />
+            <Picker Grid.Column="1" x:Name="PaymentPicker" Title="Medio de pago" SelectedIndexChanged="OnFilterChanged" />
+        </Grid>
+        <Grid Grid.Row="2" RowDefinitions="Auto,*" RowSpacing="8">
+            <Picker x:Name="CategoryPicker" Title="Filtrar por categoría" SelectedIndexChanged="OnFilterChanged" />
+            <CollectionView Grid.Row="1" x:Name="ExpensesCollection" EmptyView="No hay gastos registrados">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,8" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto">
+                                <Label Text="{Binding Concept}" FontAttributes="Bold" FontSize="16" />
+                                <Label Grid.Column="1" Text="{Binding Amount, StringFormat='${0:N0}'}" FontAttributes="Bold" FontSize="16" />
+                                <Label Grid.Row="1" Text="{Binding Category}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding PaymentMethod}" FontSize="12" HorizontalTextAlignment="End" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                                <Label Grid.Row="2" Text="{Binding ExpenseDateUtc, StringFormat='{0:dd/MM/yyyy}'}" FontSize="11" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding UserName}" FontSize="11" HorizontalTextAlignment="End" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                                <Label Grid.Row="3" Grid.ColumnSpan="2" Text="📷 Comprobante adjunto" IsVisible="{Binding HasReceipt}" FontSize="11" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</ContentPage>

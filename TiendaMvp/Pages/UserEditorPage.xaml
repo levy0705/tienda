@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.UserEditorPage"
+             Title="Usuario"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label x:Name="PageTitle" Text="Nuevo usuario" FontSize="26" FontAttributes="Bold" />
+            <Label Text="El PIN se guarda como hash local y no se muestra en pantalla." FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Entry x:Name="NameEntry" Placeholder="Nombre visible" />
+            <Picker x:Name="RolePicker" Title="Rol" />
+            <Entry x:Name="PinEntry" Placeholder="PIN (obligatorio al crear; opcional al editar)" Keyboard="Numeric" IsPassword="True" MaxLength="8" />
+            <Button Text="Guardar usuario" Clicked="OnSaveClicked" />
+            <Button x:Name="ToggleButton" Text="Bloquear usuario" Clicked="OnToggleClicked" IsVisible="False" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

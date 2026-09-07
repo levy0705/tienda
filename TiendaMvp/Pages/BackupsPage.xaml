@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.BackupsPage"
+             Title="Copias de seguridad"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <Grid Padding="20,18" RowDefinitions="Auto,Auto,Auto,*" RowSpacing="12">
+        <VerticalStackLayout Spacing="4">
+            <Label Text="Protección del negocio" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Label Text="Copias de seguridad" FontSize="26" FontAttributes="Bold" />
+            <Label Text="Incluyen la información, configuración e imágenes de la tienda y se protegen con el PIN de un administrador." FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+        </VerticalStackLayout>
+
+        <Border x:Name="ReminderBorder" Grid.Row="1" Padding="14" BackgroundColor="{AppThemeBinding Light=#FFF3D9, Dark=#3C3018}" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+            <Label x:Name="ReminderLabel" Text="Aún no hay un respaldo reciente. Crea uno y compártelo fuera del teléfono." FontSize="13" TextColor="{AppThemeBinding Light=#815B00, Dark=#F6D889}" />
+        </Border>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="8">
+            <Button x:Name="CreateButton" Text="Crear copia" Clicked="OnCreateClicked" />
+            <Button Text="Restaurar archivo" Clicked="OnPickRestoreClicked" BackgroundColor="{AppThemeBinding Light=#E4F4ED, Dark=#183629}" TextColor="{AppThemeBinding Light=#237A54, Dark=#8DE0B5}" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="3" x:Name="BackupsCollection" EmptyView="Todavía no hay copias guardadas en este teléfono.">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,8" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                            <Label Text="{Binding TypeLabel}" FontAttributes="Bold" FontSize="16" />
+                            <Label Grid.Column="1" Text="{Binding SizeLabel}" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding CreatedLabel}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                            <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="8" Margin="0,10,0,0">
+                                <Button Text="Compartir" Clicked="OnShareClicked" CommandParameter="{Binding .}" Padding="12,6" />
+                                <Button Text="Validar y restaurar" Clicked="OnRestoreClicked" CommandParameter="{Binding .}" Padding="12,6" BackgroundColor="{AppThemeBinding Light=#FBE8E7, Dark=#402222}" TextColor="{AppThemeBinding Light=#A33A34, Dark=#F2A7A2}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.ProductQrPage"
+             Title="Código QR"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="14" HorizontalOptions="Center">
+            <Label x:Name="ProductNameLabel" Text="Código QR" FontSize="26" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            <Label x:Name="ProductCodeLabel" FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" HorizontalTextAlignment="Center" />
+            <Border Padding="20" BackgroundColor="White" StrokeThickness="0" StrokeShape="RoundRectangle 18"><Image x:Name="QrImage" WidthRequest="280" HeightRequest="280" Aspect="AspectFit" /></Border>
+            <Label Text="Este QR solo identifica el producto. Los precios y existencias se consultan en la app." FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" HorizontalTextAlignment="Center" MaximumWidthRequest="320" />
+            <Button Text="Guardar copia" Clicked="OnSaveClicked" WidthRequest="280" />
+            <Button Text="Compartir" Clicked="OnShareClicked" WidthRequest="280" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#512BD4, Dark=#AC99EA}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

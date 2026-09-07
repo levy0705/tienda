@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.InventoryMovementsPage"
+             Title="Movimientos"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20,18" RowSpacing="12">
+        <VerticalStackLayout><Label Text="Trazabilidad" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label Text="Movimientos de inventario" FontSize="26" FontAttributes="Bold" /></VerticalStackLayout>
+        <Picker Grid.Row="1" x:Name="ProductPicker" Title="Todos los productos" SelectedIndexChanged="OnProductChanged" />
+        <CollectionView Grid.Row="2" x:Name="MovementsCollection" EmptyView="Aún no hay movimientos">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,10" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10"><VerticalStackLayout Spacing="3"><Label Text="{Binding ProductName}" FontAttributes="Bold" /><Label Text="{Binding MovementType}" FontSize="13" /><Label Text="{Binding Reason}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label Text="{Binding CreatedAtUtc, StringFormat='UTC: {0:yyyy-MM-dd HH:mm}'}" FontSize="11" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></VerticalStackLayout><VerticalStackLayout Grid.Column="1" HorizontalOptions="End"><Label Text="{Binding QuantityLabel}" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="End" /><Label Text="{Binding NewStock, StringFormat='Saldo: {0:0.##}'}" FontSize="12" HorizontalTextAlignment="End" /></VerticalStackLayout></Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

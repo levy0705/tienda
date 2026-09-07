@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.ProductEditorPage"
+             Title="Producto"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label x:Name="PageTitle" Text="Nuevo producto" FontSize="26" FontAttributes="Bold" />
+            <Label Text="Información básica" FontSize="14" FontAttributes="Bold" Margin="0,8,0,0" />
+            <Entry x:Name="NameEntry" Placeholder="Nombre del producto" />
+            <Editor x:Name="DescriptionEditor" Placeholder="Descripción (opcional)" AutoSize="TextChanges" MinimumHeightRequest="80" />
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Código interno *" FontSize="13" />
+                <Entry x:Name="CodeEntry"
+                       Placeholder="Ej. PROD-001"
+                       Keyboard="Text"
+                       IsEnabled="True"
+                       IsReadOnly="False"
+                       ClearButtonVisibility="WhileEditing" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Unidad de medida *" FontSize="13" />
+                <Picker x:Name="UnitPicker" Title="Selecciona unidad" />
+            </VerticalStackLayout>
+            <Picker x:Name="CategoryPicker" Title="Categoría" />
+            <Label Text="Precios e inventario" FontSize="14" FontAttributes="Bold" Margin="0,8,0,0" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10"><Entry x:Name="PurchaseCostEntry" Placeholder="Costo de compra" Keyboard="Numeric" /><Entry x:Name="SalePriceEntry" Placeholder="Precio de venta" Keyboard="Numeric" /></Grid>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10"><Entry x:Name="MinimumStockEntry" Placeholder="Existencia mínima" Keyboard="Numeric" /><Entry x:Name="TaxRateEntry" Placeholder="Impuesto %" Keyboard="Numeric" /></Grid>
+            <Entry x:Name="InitialStockEntry" Placeholder="Existencia inicial" Keyboard="Numeric" />
+            <Label Text="Imagen" FontSize="14" FontAttributes="Bold" Margin="0,8,0,0" />
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12"><Border WidthRequest="82" HeightRequest="82" BackgroundColor="{AppThemeBinding Light=#E9EDF0, Dark=#202A2F}" StrokeThickness="0" StrokeShape="RoundRectangle 14"><Image x:Name="ProductImage" Aspect="AspectFill" /></Border><Button Grid.Column="1" Text="Elegir fotografía" Clicked="OnChoosePhotoClicked" HorizontalOptions="Start" /></Grid>
+            <Button x:Name="SaveButton" Text="Guardar producto" Clicked="OnSaveClicked" Margin="0,10,0,0" />
+            <Button x:Name="QrButton" Text="Ver y compartir QR" Clicked="OnQrClicked" IsVisible="False" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#512BD4, Dark=#AC99EA}" />
+            <Button x:Name="ToggleButton" Text="Desactivar producto" Clicked="OnToggleClicked" IsVisible="False" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#A5661D, Dark=#F0C17D}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

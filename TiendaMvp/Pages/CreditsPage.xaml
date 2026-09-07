@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.CreditsPage"
+             Title="Créditos"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="20,18" RowSpacing="12">
+        <Grid ColumnDefinitions="*,Auto"><VerticalStackLayout><Label Text="Cartera" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label Text="Créditos" FontSize="26" FontAttributes="Bold" /></VerticalStackLayout><Border Grid.Column="1" Padding="9,7" BackgroundColor="{AppThemeBinding Light=#FBECD9, Dark=#3A2A16}" StrokeThickness="0" StrokeShape="RoundRectangle 12"><Label Text="Solo cobros en caja" FontSize="12" TextColor="{AppThemeBinding Light=#A5661D, Dark=#F0C17D}" /></Border></Grid>
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8"><SearchBar x:Name="SearchBox" Placeholder="Buscar cliente" TextChanged="OnSearchChanged" /><Picker Grid.Column="1" x:Name="StatusPicker" Title="Estado" WidthRequest="155" SelectedIndexChanged="OnStatusChanged" /></Grid>
+        <Label Grid.Row="2" Text="Los abonos requieren una caja abierta y generan comprobante." FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+        <Grid Grid.Row="3" RowDefinitions="*,Auto" RowSpacing="10">
+            <CollectionView x:Name="CreditsCollection" EmptyView="No hay créditos que mostrar">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,10" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                <VerticalStackLayout Spacing="3"><Label Text="{Binding CustomerName}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" MaxLines="1" /><Label Text="{Binding CreatedAtUtc, StringFormat='Creado: {0:dd/MM/yyyy}'}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label Text="{Binding DueDateUtc, StringFormat='Vence: {0:dd/MM/yyyy}'}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Grid ColumnDefinitions="*,*" ColumnSpacing="8" Margin="0,4,0,0"><Label Text="{Binding OriginalAmount, StringFormat='Original: ${0:N0}'}" FontSize="13" /><Label Grid.Column="1" Text="{Binding BalanceDue, StringFormat='Saldo: ${0:N0}'}" FontSize="13" FontAttributes="Bold" HorizontalTextAlignment="End" /></Grid><Label Text="{Binding Status}" FontSize="13" /></VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="1" Spacing="6"><Button Text="Abonar" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnPaymentClicked" /><Button Text="Ajustar" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnAdjustClicked" /><Button Text="Historial" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnHistoryClicked" /></VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Border Grid.Row="1" x:Name="HistoryPanel" IsVisible="False" Padding="12" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14"><VerticalStackLayout Spacing="6"><Label x:Name="HistoryTitle" FontAttributes="Bold" /><CollectionView x:Name="MovementsCollection" HeightRequest="150" EmptyView="Sin movimientos"><CollectionView.ItemTemplate><DataTemplate><Grid ColumnDefinitions="*,Auto" Padding="0,3"><Label Text="{Binding MovementType}" FontSize="12" /><Label Grid.Column="1" Text="{Binding AmountLabel}" FontSize="12" /></Grid></DataTemplate></CollectionView.ItemTemplate></CollectionView></VerticalStackLayout></Border>
+        </Grid>
+    </Grid>
+</ContentPage>

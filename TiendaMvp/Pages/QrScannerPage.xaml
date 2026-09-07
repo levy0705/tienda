@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="TiendaMvp.Pages.QrScannerPage"
+             Title="Escanear QR"
+             BackgroundColor="Black">
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="0">
+        <VerticalStackLayout Padding="20,18" BackgroundColor="#66000000"><Label Text="Escanear producto" TextColor="White" FontSize="24" FontAttributes="Bold" /><Label Text="Apunta la cámara al código QR del producto." TextColor="#E5E5E5" FontSize="13" /></VerticalStackLayout>
+        <zxing:CameraBarcodeReaderView Grid.Row="1" BarcodesDetected="OnBarcodesDetected" />
+        <VerticalStackLayout Grid.Row="2" Padding="20,16" BackgroundColor="#66000000"><Label x:Name="StatusLabel" Text="Buscando un código…" TextColor="White" HorizontalTextAlignment="Center" FontSize="14" /><Button Text="Cancelar" Clicked="OnCancelClicked" BackgroundColor="White" TextColor="Black" /></VerticalStackLayout>
+    </Grid>
+</ContentPage>

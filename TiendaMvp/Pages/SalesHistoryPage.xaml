@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.SalesHistoryPage"
+             Title="Historial de ventas"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20,18" RowSpacing="12">
+        <VerticalStackLayout><Label Text="Punto de venta" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label Text="Historial de ventas" FontSize="26" FontAttributes="Bold" /></VerticalStackLayout>
+        <SearchBar Grid.Row="1" x:Name="SearchBox" Placeholder="Buscar por cliente" TextChanged="OnSearchChanged" />
+        <CollectionView Grid.Row="2" x:Name="SalesCollection" EmptyView="No hay ventas registradas">
+            <CollectionView.ItemTemplate><DataTemplate>
+                <Border Margin="0,0,0,10" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10"><VerticalStackLayout Spacing="3"><Label Text="{Binding CustomerName}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" MaxLines="1" /><Label Text="{Binding SaleDateUtc, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Grid ColumnDefinitions="*,*" ColumnSpacing="8"><Label Text="{Binding Total, StringFormat='Total: ${0:N0}'}" FontAttributes="Bold" /><Label Grid.Column="1" Text="{Binding PaidAmount, StringFormat='Pagado: ${0:N0}'}" HorizontalTextAlignment="End" /></Grid><Label Text="{Binding CreditAmount, StringFormat='Crédito: ${0:N0}'}" /><Label Text="{Binding Status}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></VerticalStackLayout><VerticalStackLayout Grid.Column="1" Spacing="6"><Button Text="Detalle" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnDetailsClicked" /><Button Text="Comprobante" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnReceiptClicked" /><Button Text="Anular / devolver" FontSize="12" Padding="10,6" CommandParameter="{Binding .}" Clicked="OnCancelClicked" /></VerticalStackLayout></Grid>
+                </Border>
+            </DataTemplate></CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

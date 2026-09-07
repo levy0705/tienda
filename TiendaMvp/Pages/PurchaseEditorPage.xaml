@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.PurchaseEditorPage"
+             Title="Compra"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label x:Name="PageTitle" Text="Nueva compra" FontSize="26" FontAttributes="Bold" />
+            <Label x:Name="StatusLabel" Text="Borrador" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Grid x:Name="EditorForm" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="10">
+                <Picker x:Name="SupplierPicker" Title="Proveedor *" ItemDisplayBinding="{Binding Name}" />
+                <Entry Grid.Row="1" x:Name="DocumentNumberEntry" Placeholder="Número de documento (opcional)" />
+                <Picker Grid.Row="2" x:Name="ProductPicker" Title="Producto" ItemDisplayBinding="{Binding Name}" SelectedIndexChanged="OnProductChanged" />
+                <Grid Grid.Row="3" ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <Button Text="Escanear QR" Clicked="OnScanClicked" />
+                    <Label Grid.Column="1" x:Name="SelectedProductLabel" Text="Selecciona un producto o escanea su QR" VerticalOptions="Center" FontSize="12" LineBreakMode="TailTruncation" MaxLines="2" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                </Grid>
+                <Grid Grid.Row="4" ColumnDefinitions="*,*" ColumnSpacing="8">
+                    <VerticalStackLayout Spacing="3">
+                        <Label Text="Cantidad" FontSize="12" />
+                        <Entry x:Name="QuantityEntry" Placeholder="Ej. 1" Keyboard="Numeric" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="3">
+                        <Label Text="Costo unitario" FontSize="12" />
+                        <Entry x:Name="UnitCostEntry" Placeholder="Ej. 10000" Keyboard="Numeric" />
+                    </VerticalStackLayout>
+                </Grid>
+                <Button Grid.Row="5" Text="Añadir producto a la compra" Clicked="OnAddLineClicked" />
+                <CollectionView Grid.Row="6" x:Name="LinesCollection" HeightRequest="220" EmptyView="Aún no hay productos">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,0,0,6" Padding="10" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 10">
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                    <VerticalStackLayout Spacing="2"><Label Text="{Binding ProductName}" FontAttributes="Bold" LineBreakMode="TailTruncation" MaxLines="2" /><Label Text="{Binding LineLabel}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></VerticalStackLayout>
+                                    <Button Grid.Column="1" Text="Quitar" FontSize="12" Padding="8,4" CommandParameter="{Binding .}" Clicked="OnRemoveLineClicked" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <VerticalStackLayout><Label Text="Descuento" FontSize="13" /><Entry x:Name="DiscountEntry" Keyboard="Numeric" Text="0" TextChanged="OnTotalsChanged" /></VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1"><Label Text="Costos adicionales" FontSize="13" /><Entry x:Name="AdditionalCostsEntry" Keyboard="Numeric" Text="0" TextChanged="OnTotalsChanged" /></VerticalStackLayout>
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto" Padding="0,4"><Label Text="Subtotal" /><Label x:Name="SubtotalLabel" Text="$0" FontAttributes="Bold" /></Grid>
+            <Grid ColumnDefinitions="*,Auto"><Label Text="Total" FontSize="18" FontAttributes="Bold" /><Label x:Name="TotalLabel" Text="$0" FontSize="18" FontAttributes="Bold" /></Grid>
+            <VerticalStackLayout x:Name="PaymentSection" Spacing="4">
+                <Label Text="Pago al recibir / abono" FontSize="13" />
+                <Entry x:Name="PaidAmountEntry" Keyboard="Numeric" Text="0" Placeholder="Valor" />
+            </VerticalStackLayout>
+            <Button x:Name="SaveButton" Text="Guardar borrador" Clicked="OnSaveClicked" />
+            <Button x:Name="ReceiveButton" Text="Recibir compra y actualizar inventario" Clicked="OnReceiveClicked" />
+            <Button x:Name="PaymentButton" Text="Registrar abono" Clicked="OnPaymentClicked" />
+            <Button x:Name="CancelButton" Text="Anular compra" Clicked="OnCancelClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#B42318, Dark=#FF8A80}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

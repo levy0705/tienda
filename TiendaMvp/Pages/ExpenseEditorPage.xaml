@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.ExpenseEditorPage"
+             Title="Registrar gasto"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label Text="Nuevo gasto" FontSize="26" FontAttributes="Bold" />
+            <Label Text="El gasto quedará asociado a la caja abierta y al usuario actual." FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Entry x:Name="ConceptEntry" Placeholder="Concepto (obligatorio)" />
+            <Picker x:Name="CategoryPicker" Title="Categoría" />
+            <Entry x:Name="AmountEntry" Placeholder="Valor" Keyboard="Numeric" />
+            <Picker x:Name="PaymentPicker" Title="Medio de pago" />
+            <DatePicker x:Name="ExpenseDatePicker" />
+            <Border Padding="12" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Comprobante (opcional)" FontAttributes="Bold" />
+                    <Image x:Name="ReceiptImage" HeightRequest="120" Aspect="AspectFit" IsVisible="False" />
+                    <Button Text="Elegir fotografía" Clicked="OnChoosePhotoClicked" />
+                </VerticalStackLayout>
+            </Border>
+            <Button Text="Guardar gasto" Clicked="OnSaveClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

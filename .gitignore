@@ -1,0 +1,7 @@
+**/bin/
+**/obj/
+**/.vs/
+.dotnet-cli/
+*.apk
+*.user
+*.suo

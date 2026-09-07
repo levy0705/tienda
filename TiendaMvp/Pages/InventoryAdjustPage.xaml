@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.InventoryAdjustPage"
+             Title="Ajustar inventario"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label Text="Ajustar inventario" FontSize="26" FontAttributes="Bold" />
+            <Label Text="Cada ajuste queda registrado con usuario, fecha, existencia anterior y nueva." FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Picker x:Name="ProductPicker" Title="Producto" SelectedIndexChanged="OnProductChanged" />
+            <Label x:Name="CurrentStockLabel" Text="Existencia actual: —" FontSize="14" />
+            <Picker x:Name="MovementTypePicker" Title="Tipo de movimiento" />
+            <Entry x:Name="QuantityEntry" Placeholder="Cantidad" Keyboard="Numeric" />
+            <Editor x:Name="ReasonEditor" Placeholder="Motivo obligatorio" AutoSize="TextChanges" MinimumHeightRequest="90" />
+            <Button Text="Guardar movimiento" Clicked="OnSaveClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

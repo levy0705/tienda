@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.UsersPage"
+             Title="Usuarios y permisos"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="20,18" RowSpacing="12">
+        <Grid ColumnDefinitions="*,Auto">
+            <VerticalStackLayout>
+                <Label Text="Acceso local" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                <Label Text="Usuarios y permisos" FontSize="26" FontAttributes="Bold" />
+            </VerticalStackLayout>
+            <Button Grid.Column="1" Text="+ Usuario" Clicked="OnAddClicked" VerticalOptions="Center" />
+        </Grid>
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="8">
+            <Button Text="Cambiar mi PIN" Clicked="OnChangePinClicked" />
+            <Button Grid.Column="1" Text="Cambiar usuario" Clicked="OnSwitchUserClicked" />
+        </Grid>
+        <Border Grid.Row="2" Padding="14" Margin="0,0,0,8" BackgroundColor="{AppThemeBinding Light=#E9EDF0, Dark=#202A2F}" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+            <VerticalStackLayout Spacing="3">
+                <Label Text="Permisos por rol" FontAttributes="Bold" />
+                <Label Text="Administrador: todos · Encargado: operación y respaldos · Cajero: ventas, caja, créditos y gastos · Bodega: inventario." FontSize="11" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            </VerticalStackLayout>
+        </Border>
+        <CollectionView Grid.Row="3" x:Name="UsersCollection" EmptyView="No hay usuarios">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,8" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto">
+                            <Label Text="{Binding DisplayName}" FontSize="17" FontAttributes="Bold" />
+                            <Label Grid.Column="1" Text="{Binding Role}" FontSize="12" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Text="{Binding StatusLabel}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding LastAccessLabel}" FontSize="11" HorizontalTextAlignment="End" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                            <Button Grid.Row="2" Text="Editar" Clicked="OnEditClicked" CommandParameter="{Binding .}" />
+                            <Button Grid.Row="2" Grid.Column="1" Text="Activar/Bloquear" Clicked="OnToggleClicked" CommandParameter="{Binding .}" FontSize="12" />
+                            <Label Grid.Row="3" Grid.ColumnSpan="2" Text="El rol define las acciones disponibles en la aplicación." FontSize="11" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

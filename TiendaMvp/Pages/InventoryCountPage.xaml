@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.InventoryCountPage"
+             Title="Conteo físico"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label Text="Conteo físico" FontSize="26" FontAttributes="Bold" />
+            <Label Text="Compara lo contado con el saldo registrado y guarda solo la diferencia." FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Picker x:Name="ProductPicker" Title="Producto" SelectedIndexChanged="OnProductChanged" />
+            <Border Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14"><Grid ColumnDefinitions="*,*"><VerticalStackLayout><Label Text="Registrado" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="RegisteredStockLabel" Text="—" FontSize="22" FontAttributes="Bold" /></VerticalStackLayout><VerticalStackLayout Grid.Column="1"><Label Text="Diferencia" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="DifferenceLabel" Text="—" FontSize="22" FontAttributes="Bold" /></VerticalStackLayout></Grid></Border>
+            <Entry x:Name="CountedQuantityEntry" Placeholder="Cantidad contada" Keyboard="Numeric" TextChanged="OnCountedChanged" />
+            <Editor x:Name="ReasonEditor" Placeholder="Motivo u observación" AutoSize="TextChanges" MinimumHeightRequest="90" />
+            <Button Text="Guardar corrección de conteo" Clicked="OnSaveClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

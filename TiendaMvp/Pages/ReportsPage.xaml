@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.ReportsPage"
+             Title="Reportes"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label Text="Análisis del negocio" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Label Text="Reportes esenciales" FontSize="26" FontAttributes="Bold" />
+            <Picker x:Name="ReportPicker" Title="Selecciona un reporte" SelectedIndexChanged="OnReportChanged" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <VerticalStackLayout><Label Text="Desde" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><DatePicker x:Name="FromDatePicker" Format="dd/MM/yyyy" /></VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1"><Label Text="Hasta" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><DatePicker x:Name="ToDatePicker" Format="dd/MM/yyyy" /></VerticalStackLayout>
+            </Grid>
+            <Button Text="Actualizar reporte" Clicked="OnRefreshClicked" />
+            <Border Padding="14" BackgroundColor="{AppThemeBinding Light=#E4F4ED, Dark=#183629}" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                <Label x:Name="SummaryLabel" Text="Selecciona un reporte para consultar sus datos." FontAttributes="Bold" TextColor="{AppThemeBinding Light=#237A54, Dark=#8DE0B5}" />
+            </Border>
+            <CollectionView x:Name="ReportCollection" EmptyView="No hay datos para el periodo seleccionado">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,8" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 14">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                <Label Text="{Binding Label}" FontAttributes="Bold" FontSize="15" />
+                                <Label Grid.Column="1" Text="{Binding Amount, StringFormat='${0:N0}'}" FontAttributes="Bold" FontSize="15" />
+                                <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Detail}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="Los reportes se muestran en pantalla. La exportación a archivo se incorporará en una iteración posterior." FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

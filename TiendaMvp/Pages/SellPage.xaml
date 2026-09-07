@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.SellPage"
+             Title="Vender"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Grid ColumnDefinitions="*,Auto"><VerticalStackLayout><Label Text="Punto de venta" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label Text="Nueva venta" FontSize="26" FontAttributes="Bold" /></VerticalStackLayout><Label Grid.Column="1" x:Name="CashStatusLabel" Text="Caja cerrada" FontSize="12" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#A5661D, Dark=#F0C17D}" /></Grid>
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8"><SearchBar x:Name="SearchBox" Placeholder="Buscar producto" TextChanged="OnSearchChanged" /><Button Grid.Column="1" Text="Escanear QR" Clicked="OnScanClicked" /></Grid>
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8"><Picker x:Name="ProductPicker" Title="Producto" ItemDisplayBinding="{Binding Name}" SelectedIndexChanged="OnProductChanged" /><Entry Grid.Column="1" x:Name="QuantityEntry" Placeholder="Cantidad" Keyboard="Numeric" WidthRequest="95" /></Grid>
+            <Button Text="Añadir producto" Clicked="OnAddLineClicked" />
+            <CollectionView x:Name="LinesCollection" HeightRequest="220" EmptyView="Agrega un producto buscando o escaneando su QR"><CollectionView.ItemTemplate><DataTemplate><Border Margin="0,0,0,6" Padding="10" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 10"><Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="5"><Label Text="{Binding ProductName}" FontAttributes="Bold" LineBreakMode="TailTruncation" MaxLines="1" /><Button Grid.Column="1" Text="Quitar" FontSize="12" Padding="8,4" CommandParameter="{Binding .}" Clicked="OnRemoveLineClicked" /><Label Grid.Row="1" Text="{Binding LineLabel}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="2"><Button Text="−" FontSize="16" Padding="8,3" CommandParameter="{Binding .}" Clicked="OnDecreaseLineClicked" /><Button Text="+" FontSize="16" Padding="8,3" CommandParameter="{Binding .}" Clicked="OnIncreaseLineClicked" /></HorizontalStackLayout></Grid></Border></DataTemplate></CollectionView.ItemTemplate></CollectionView>
+            <Picker x:Name="CustomerPicker" Title="Cliente (general para venta sin identificación)" ItemDisplayBinding="{Binding Name}" />
+            <VerticalStackLayout Spacing="5"><Label Text="Descuento autorizado" FontSize="13" /><Entry x:Name="DiscountEntry" Text="0" Keyboard="Numeric" TextChanged="OnTotalsChanged" /></VerticalStackLayout>
+            <VerticalStackLayout Spacing="5"><Label Text="Efectivo recibido (para calcular cambio)" FontSize="13" LineBreakMode="WordWrap" /><Entry x:Name="CashTenderedEntry" Text="0" Keyboard="Numeric" TextChanged="OnTotalsChanged" /></VerticalStackLayout>
+            <Picker x:Name="PaymentMethodPicker" Title="Método de pago" />
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8"><Entry x:Name="PaymentAmountEntry" Placeholder="Monto aplicado" Keyboard="Numeric" /><Button Grid.Column="1" Text="Añadir pago" Clicked="OnAddPaymentClicked" /></Grid>
+            <CollectionView x:Name="PaymentsCollection" HeightRequest="110" EmptyView="Sin pagos: se registrará como crédito total si el cliente lo permite"><CollectionView.ItemTemplate><DataTemplate><Border Margin="0,0,0,5" Padding="8" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 8"><Grid ColumnDefinitions="*,Auto"><Label Text="{Binding AmountLabel}" FontSize="12" /><Button Grid.Column="1" Text="Quitar" FontSize="11" Padding="7,3" CommandParameter="{Binding .}" Clicked="OnRemovePaymentClicked" /></Grid></Border></DataTemplate></CollectionView.ItemTemplate></CollectionView>
+            <Grid ColumnDefinitions="*,Auto"><Label Text="Vencimiento del crédito" FontSize="13" /><DatePicker Grid.Column="1" x:Name="DueDatePicker" Format="dd/MM/yyyy" /></Grid>
+            <Grid ColumnDefinitions="*,Auto"><Label Text="Total" FontSize="20" FontAttributes="Bold" /><Label Grid.Column="1" x:Name="TotalLabel" Text="$0" FontSize="24" FontAttributes="Bold" /></Grid>
+            <Label x:Name="ChangeLabel" Text="Cambio: $0" HorizontalTextAlignment="End" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Button x:Name="RegisterButton" Text="Confirmar venta" Clicked="OnRegisterSaleClicked" />
+            <Button Text="Registrar venta total a crédito" Clicked="OnFullCreditClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#512BD4, Dark=#AC99EA}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

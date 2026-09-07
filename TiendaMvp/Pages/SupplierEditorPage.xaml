@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.SupplierEditorPage"
+             Title="Proveedor"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="12">
+            <Label x:Name="PageTitle" Text="Nuevo proveedor" FontSize="26" FontAttributes="Bold" />
+            <Label Text="Nombre *" FontSize="13" />
+            <Entry x:Name="NameEntry" Placeholder="Nombre comercial o razón social" />
+            <Label Text="Identificación fiscal" FontSize="13" />
+            <Entry x:Name="TaxIdEntry" Placeholder="NIT, RUC o identificación" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <VerticalStackLayout><Label Text="Teléfono" FontSize="13" /><Entry x:Name="PhoneEntry" Keyboard="Telephone" /></VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1"><Label Text="Correo" FontSize="13" /><Entry x:Name="EmailEntry" Keyboard="Email" /></VerticalStackLayout>
+            </Grid>
+            <Label Text="Dirección" FontSize="13" />
+            <Entry x:Name="AddressEntry" />
+            <Label Text="Observaciones" FontSize="13" />
+            <Editor x:Name="NotesEditor" AutoSize="TextChanges" MinimumHeightRequest="90" />
+            <Button Text="Guardar proveedor" Clicked="OnSaveClicked" />
+            <Button x:Name="ToggleButton" Text="Desactivar proveedor" Clicked="OnToggleClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#512BD4, Dark=#AC99EA}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

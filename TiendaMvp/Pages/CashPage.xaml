@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.CashPage"
+             Title="Caja"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,18" Spacing="14">
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout>
+                    <Label Text="Control financiero" FontSize="14" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                    <Label Text="Caja" FontSize="26" FontAttributes="Bold" />
+                </VerticalStackLayout>
+                <Label Grid.Column="1" x:Name="StatusLabel" Text="Cerrada" FontSize="12" VerticalOptions="Center" />
+            </Grid>
+
+            <Border x:Name="OpenPanel" Padding="18" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Comienza la jornada" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="Cada usuario tiene su propia sesión de caja." FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                    <Entry x:Name="OpeningEntry" Placeholder="Monto inicial" Keyboard="Numeric" />
+                    <Button Text="Abrir caja" Clicked="OnOpenClicked" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border x:Name="OpenActionsPanel" IsVisible="False" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Movimientos manuales" FontSize="17" FontAttributes="Bold" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Button Text="+ Entrada" Clicked="OnExtraordinaryIncomeClicked" />
+                        <Button Grid.Column="1" Text="− Retiro" Clicked="OnWithdrawalClicked" BackgroundColor="{AppThemeBinding Light=#FCE8E8, Dark=#512B2B}" TextColor="{AppThemeBinding Light=#A32D2D, Dark=#FFCACA}" />
+                    </Grid>
+                    <Button Text="Registrar gasto" Clicked="OnExpenseClicked" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border x:Name="ClosePanel" IsVisible="False" Padding="18" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Arqueo y cierre" FontSize="18" FontAttributes="Bold" />
+                    <Label x:Name="ExpectedLabel" Text="Efectivo esperado: $0" FontSize="14" FontAttributes="Bold" />
+                    <Label x:Name="DifferencePreviewLabel" Text="Diferencia: $0" FontSize="13" />
+                    <Entry x:Name="ClosingEntry" Placeholder="Total contado en efectivo" Keyboard="Numeric" TextChanged="OnClosingAmountChanged" />
+                    <Editor x:Name="ObservationsEditor" Placeholder="Observaciones (opcional)" AutoSize="TextChanges" MinimumHeightRequest="70" />
+                    <Button Text="Cerrar caja con PIN" Clicked="OnCloseClicked" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Resumen de la caja abierta" FontSize="17" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Border Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Ventas cobradas" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="SalesLabel" Text="$0" FontSize="22" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Abonos" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="PaymentsLabel" Text="$0" FontSize="22" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+            </Grid>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Border Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Gastos" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="ExpensesLabel" Text="$0" FontSize="20" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Padding="14" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="5"><Label Text="Retiros" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /><Label x:Name="WithdrawalsLabel" Text="$0" FontSize="20" FontAttributes="Bold" /></VerticalStackLayout>
+                </Border>
+            </Grid>
+            <Label x:Name="PaymentTotalsLabel" Text="Por medio de pago: sin movimientos" FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Label x:Name="ExtraordinaryLabel" Text="Entradas extraordinarias: $0" FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Label x:Name="VoidedLabel" Text="Anulaciones y devoluciones: $0" FontSize="13" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+
+            <Label Text="Movimientos recientes" FontSize="17" FontAttributes="Bold" />
+            <CollectionView x:Name="MovementsCollection" HeightRequest="220" EmptyView="Sin movimientos">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,Auto" Padding="0,4">
+                            <VerticalStackLayout><Label Text="{Binding MovementType}" FontSize="13" /><Label Text="{Binding Notes}" FontSize="11" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" /></VerticalStackLayout>
+                            <Label Grid.Column="1" Text="{Binding Amount, StringFormat='${0:N0}'}" FontSize="13" FontAttributes="Bold" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Historial de cierres" FontSize="17" FontAttributes="Bold" />
+            <CollectionView x:Name="ClosedSessionsCollection" HeightRequest="220" EmptyView="Aún no hay cierres" SelectionMode="Single" SelectionChanged="OnClosedSessionSelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,8" Padding="12" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 12">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                                <Label Text="{Binding ClosedAtUtc, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="{Binding Difference, StringFormat='Diferencia: ${0:N0}'}" FontSize="12" />
+                                <Label Grid.Row="1" Text="{Binding ExpectedAmount, StringFormat='Esperado: ${0:N0}'}" FontSize="12" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding CountedAmount, StringFormat='Contado: ${0:N0}'}" FontSize="12" HorizontalTextAlignment="End" />
+                                <Label Grid.Row="2" Text="{Binding UserName}" FontSize="11" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding ClosingObservations}" FontSize="11" HorizontalTextAlignment="End" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.LoginPage"
+             Title="Iniciar sesión"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <ScrollView>
+        <VerticalStackLayout Padding="28,60" Spacing="16" MaximumWidthRequest="480" HorizontalOptions="Center">
+            <Label Text="Mi tienda" FontSize="15" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Label Text="Iniciar sesión" FontSize="28" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            <Label Text="Selecciona tu usuario y escribe tu PIN para continuar." FontSize="13" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Border Margin="0,16,0,0" Padding="18" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 18">
+                <VerticalStackLayout Spacing="10">
+                    <Picker x:Name="UserPicker" Title="Usuario" />
+                    <Entry x:Name="PinEntry" Placeholder="PIN" IsPassword="True" Keyboard="Numeric" MaxLength="8" />
+                    <Button Text="Entrar" Clicked="OnLoginClicked" />
+                    <Label x:Name="ErrorLabel"
+                           IsVisible="False"
+                           FontSize="12"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light=#A33A34, Dark=#F2A7A2}" />
+                </VerticalStackLayout>
+            </Border>
+            <Label Text="Los usuarios y sus permisos se guardan únicamente en este teléfono." FontSize="12" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
