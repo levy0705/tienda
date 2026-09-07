@@ -130,8 +130,11 @@ public sealed class LocalDatabase : ILocalDatabase
         // Las migraciones se aplican en orden, sin borrar datos existentes.
         if (fromVersion < 2)
         {
-            _connection.Execute("ALTER TABLE products ADD COLUMN Description TEXT NOT NULL DEFAULT ''");
-            _connection.Execute("ALTER TABLE products ADD COLUMN TaxRate REAL NOT NULL DEFAULT 0");
+            // Algunas versiones de desarrollo ya habían creado estas columnas
+            // aunque el registro de versión aún indicara el esquema 1. La
+            // migración debe poder ejecutarse de nuevo sin cerrar la aplicación.
+            AddColumnIfMissing("products", "Description", "TEXT NOT NULL DEFAULT ''");
+            AddColumnIfMissing("products", "TaxRate", "REAL NOT NULL DEFAULT 0");
         }
 
         if (fromVersion < 3)
@@ -159,7 +162,7 @@ public sealed class LocalDatabase : ILocalDatabase
 
         if (fromVersion < 4)
         {
-            _connection.Execute("ALTER TABLE products ADD COLUMN LastPurchaseCost REAL NOT NULL DEFAULT 0");
+            AddColumnIfMissing("products", "LastPurchaseCost", "REAL NOT NULL DEFAULT 0");
         }
 
         if (fromVersion < 6)
