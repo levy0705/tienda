@@ -11,13 +11,15 @@
             <Entry x:Name="NameEntry" Placeholder="Nombre del producto" />
             <Editor x:Name="DescriptionEditor" Placeholder="Descripción (opcional)" AutoSize="TextChanges" MinimumHeightRequest="80" />
             <VerticalStackLayout Spacing="5">
-                <Label Text="Código interno *" FontSize="13" />
+                <Label Text="Código interno (generado automáticamente)" FontSize="13" />
                 <Entry x:Name="CodeEntry"
-                       Placeholder="Ej. PROD-001"
-                       Keyboard="Text"
-                       IsEnabled="True"
-                       IsReadOnly="False"
-                       ClearButtonVisibility="WhileEditing" />
+                       IsReadOnly="True"
+                       TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}"
+                       BackgroundColor="{AppThemeBinding Light=#E9EDF0, Dark=#202A2F}"
+                       Placeholder="Se asignará al crear el producto" />
+                <Label Text="Este código se usará para búsquedas y no cambia al editar el producto."
+                       FontSize="12"
+                       TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
             </VerticalStackLayout>
             <VerticalStackLayout Spacing="5">
                 <Label Text="Unidad de medida *" FontSize="13" />
@@ -25,9 +27,26 @@
             </VerticalStackLayout>
             <Picker x:Name="CategoryPicker" Title="Categoría" />
             <Label Text="Precios e inventario" FontSize="14" FontAttributes="Bold" Margin="0,8,0,0" />
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10"><Entry x:Name="PurchaseCostEntry" Placeholder="Costo de compra" Keyboard="Numeric" /><Entry x:Name="SalePriceEntry" Placeholder="Precio de venta" Keyboard="Numeric" /></Grid>
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10"><Entry x:Name="MinimumStockEntry" Placeholder="Existencia mínima" Keyboard="Numeric" /><Entry x:Name="TaxRateEntry" Placeholder="Impuesto %" Keyboard="Numeric" /></Grid>
-            <Entry x:Name="InitialStockEntry" Placeholder="Existencia inicial" Keyboard="Numeric" />
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Costo de compra" FontSize="13" />
+                <Entry x:Name="PurchaseCostEntry" Keyboard="Numeric" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Precio de venta" FontSize="13" />
+                <Entry x:Name="SalePriceEntry" Keyboard="Numeric" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Existencia mínima" FontSize="13" />
+                <Entry x:Name="MinimumStockEntry" Keyboard="Numeric" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Impuesto (%)" FontSize="13" />
+                <Entry x:Name="TaxRateEntry" Keyboard="Numeric" />
+            </VerticalStackLayout>
+            <VerticalStackLayout x:Name="InitialStockSection" Spacing="5">
+                <Label Text="Existencia inicial" FontSize="13" />
+                <Entry x:Name="InitialStockEntry" Keyboard="Numeric" />
+            </VerticalStackLayout>
             <Label Text="Imagen" FontSize="14" FontAttributes="Bold" Margin="0,8,0,0" />
             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12"><Border WidthRequest="82" HeightRequest="82" BackgroundColor="{AppThemeBinding Light=#E9EDF0, Dark=#202A2F}" StrokeThickness="0" StrokeShape="RoundRectangle 14"><Image x:Name="ProductImage" Aspect="AspectFill" /></Border><Button Grid.Column="1" Text="Elegir fotografía" Clicked="OnChoosePhotoClicked" HorizontalOptions="Start" /></Grid>
             <Button x:Name="SaveButton" Text="Guardar producto" Clicked="OnSaveClicked" Margin="0,10,0,0" />

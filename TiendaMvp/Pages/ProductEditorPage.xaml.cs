@@ -59,6 +59,9 @@ public partial class ProductEditorPage : ContentPage
             ? new Product()
             : _catalog.GetProduct(_productId) ?? new Product();
 
+        if (string.IsNullOrWhiteSpace(_product.InternalCode))
+            _product.InternalCode = _catalog.GenerateInternalCode();
+
         PageTitle.Text = string.IsNullOrWhiteSpace(_productId) ? "Nuevo producto" : "Editar producto";
         NameEntry.Text = _product.Name;
         DescriptionEditor.Text = _product.Description;
@@ -70,7 +73,7 @@ public partial class ProductEditorPage : ContentPage
         MinimumStockEntry.Text = FormatNumber(_product.MinimumStock);
         TaxRateEntry.Text = FormatNumber(_product.TaxRate);
         PurchaseCostEntry.IsVisible = _permissions.Has(AppPermission.ViewCostsAndProfit);
-        InitialStockEntry.IsVisible = string.IsNullOrWhiteSpace(_productId);
+        InitialStockSection.IsVisible = string.IsNullOrWhiteSpace(_productId);
         if (!string.IsNullOrWhiteSpace(_product.ImagePath))
             ProductImage.Source = _images.GetAbsolutePath(_product.ImagePath);
 
@@ -105,17 +108,10 @@ public partial class ProductEditorPage : ContentPage
         try
         {
             var isNewProduct = string.IsNullOrWhiteSpace(_productId);
-            var internalCode = CodeEntry.Text?.Trim() ?? string.Empty;
-            if (string.IsNullOrWhiteSpace(internalCode))
-            {
-                await _feedback.ShowMessageAsync("Código requerido", "El código interno es obligatorio.");
-                CodeEntry.Focus();
-                return;
-            }
-
             _product.Name = NameEntry.Text?.Trim() ?? string.Empty;
             _product.Description = DescriptionEditor.Text?.Trim() ?? string.Empty;
-            _product.InternalCode = internalCode;
+            // El código lo genera la aplicación y no se puede editar desde el formulario.
+            _product.InternalCode = CodeEntry.Text?.Trim() ?? _catalog.GenerateInternalCode();
             _product.Unit = UnitPicker.SelectedItem?.ToString() ?? string.Empty;
             _product.CategoryId = (CategoryPicker.SelectedItem as Category)?.Id ?? string.Empty;
             _product.PurchaseCost = ParseNumber(PurchaseCostEntry.Text);

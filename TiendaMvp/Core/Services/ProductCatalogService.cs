@@ -1,5 +1,7 @@
 using TiendaMvp.Core.Entities;
 using TiendaMvp.Core.Utilities;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace TiendaMvp.Core.Services;
 
@@ -52,8 +54,36 @@ public sealed class ProductCatalogService : IProductCatalogService
     public Product? FindByQr(string qrValue) =>
         _products.GetAll().FirstOrDefault(product => product.IsActive && product.QrValue.Equals(qrValue, StringComparison.Ordinal));
 
+    public string GenerateInternalCode()
+    {
+        var usedCodes = _products.GetAll()
+            .Select(product => product.InternalCode)
+            .Where(code => !string.IsNullOrWhiteSpace(code))
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        var nextNumber = _products.GetAll()
+            .Select(product => Regex.Match(product.InternalCode ?? string.Empty, "^PROD-(\\d+)$", RegexOptions.IgnoreCase))
+            .Where(match => match.Success && int.TryParse(match.Groups[1].Value, out _))
+            .Select(match => int.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture))
+            .DefaultIfEmpty(0)
+            .Max() + 1;
+
+        string code;
+        do
+        {
+            code = $"PROD-{nextNumber:0000}";
+            nextNumber++;
+        }
+        while (usedCodes.Contains(code));
+
+        return code;
+    }
+
     public void SaveProduct(Product product)
     {
+        if (string.IsNullOrWhiteSpace(product.InternalCode))
+            product.InternalCode = GenerateInternalCode();
+
         ValidateProduct(product);
         var existing = _products.GetById(product.Id);
         var isNew = existing is null;

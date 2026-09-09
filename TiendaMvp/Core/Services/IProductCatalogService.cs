@@ -8,6 +8,7 @@ public interface IProductCatalogService
     IReadOnlyList<Category> GetCategories(bool includeInactive = false);
     Product? GetProduct(string id);
     Product? FindByQr(string qrValue);
+    string GenerateInternalCode();
     void SaveProduct(Product product);
     void SetProductActive(string id, bool isActive);
     void SaveCategory(Category category);

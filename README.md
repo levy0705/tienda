@@ -44,6 +44,7 @@ El usuario administrador inicial se crea con el PIN temporal `1234`. Debe cambia
 
 - Alta y edición de productos con nombre, descripción, precios, unidad, impuesto, existencia mínima y fotografía.
 - Activación y desactivación de productos.
+- Código interno generado automáticamente con formato `PROD-0001`, sin permitir duplicados.
 - Categorías con alta, edición y activación/desactivación.
 - Protección contra eliminación de categorías con productos asociados.
 - Búsqueda por nombre, código interno o QR y filtro por categoría.
