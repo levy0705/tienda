@@ -150,3 +150,12 @@ El usuario administrador inicial se crea con el PIN temporal `1234`. Debe cambia
 - Criterios de aceptación para consistencia de inventario, caja, cartera, auditoría y respaldos.
 - Guía de piloto real con operación limitada, cierre diario, respaldo externo e identificación de incidencias.
 - Transacciones locales compuestas para que ventas, compras, abonos, gastos, cierres y anulaciones no queden aplicados parcialmente ante un cierre inesperado.
+
+## Carga inicial de productos
+
+- Desde Inventario se puede compartir una plantilla CSV y seleccionar el archivo completado.
+- La vista previa valida nombres, precios, existencias, impuestos, estados y códigos repetidos antes de guardar.
+- Las categorías nuevas se crean automáticamente.
+- Los códigos internos vacíos se generan como `PROD-0001`, `PROD-0002`, etc.; los QR se crean junto con cada producto.
+- La existencia inicial se registra como movimiento trazable de inventario.
+- También se incluye la plantilla [productos-plantilla.csv](productos-plantilla.csv) en el repositorio.

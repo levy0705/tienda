@@ -53,6 +53,12 @@ public partial class InventoryPage : ContentPage
 
     private async void OnNewProductClicked(object? sender, EventArgs e) => await OpenEditorAsync(null);
 
+    private async void OnImportClicked(object? sender, EventArgs e)
+    {
+        var page = _services.GetRequiredService<ProductImportPage>();
+        await Navigation.PushAsync(page);
+    }
+
     private async void OnEditProductClicked(object? sender, EventArgs e)
     {
         if (sender is Button { CommandParameter: Product product })

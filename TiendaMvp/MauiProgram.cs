@@ -32,6 +32,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IAppFeedbackService, AppFeedbackService>();
         builder.Services.AddSingleton<IQrCodeService, QrCodeService>();
         builder.Services.AddSingleton<IProductCatalogService, ProductCatalogService>();
+        builder.Services.AddSingleton<IProductImportService, ProductImportService>();
         builder.Services.AddSingleton<IInventoryService, InventoryService>();
         builder.Services.AddSingleton<ISupplierService, SupplierService>();
         builder.Services.AddSingleton<IPurchaseService, PurchaseService>();
@@ -54,6 +55,7 @@ public static class MauiProgram
         builder.Services.AddTransient<InventoryCountPage>();
         builder.Services.AddTransient<InventoryMovementsPage>();
         builder.Services.AddTransient<ProductEditorPage>();
+        builder.Services.AddTransient<ProductImportPage>();
         builder.Services.AddTransient<ProductQrPage>();
         builder.Services.AddTransient<QrScannerPage>();
         builder.Services.AddTransient<SuppliersPage>();

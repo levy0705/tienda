@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TiendaMvp.Pages.ProductImportPage"
+             Title="Carga inicial"
+             BackgroundColor="{AppThemeBinding Light=#F5F7F8, Dark=#11181C}">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="20,18" RowSpacing="12">
+        <Label Text="Carga inicial de productos" FontSize="26" FontAttributes="Bold" />
+        <Label Grid.Row="1"
+               Text="Importa una plantilla CSV para crear muchos productos de una sola vez. Los códigos y QR se generan automáticamente."
+               FontSize="13"
+               LineBreakMode="WordWrap"
+               TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10">
+            <Button Text="Compartir plantilla" Clicked="OnTemplateClicked" />
+            <Button Grid.Column="1" Text="Seleccionar CSV" Clicked="OnSelectFileClicked" />
+        </Grid>
+        <VerticalStackLayout Grid.Row="3" Spacing="4">
+            <Label x:Name="FileLabel" Text="Aún no has seleccionado un archivo." FontSize="13" />
+            <Label x:Name="SummaryLabel" Text="" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+            <Label x:Name="ErrorLabel" Text="" IsVisible="False" FontSize="12" TextColor="{AppThemeBinding Light=#A33A34, Dark=#F2A7A2}" />
+            <Button x:Name="ImportButton" Text="Importar productos" IsVisible="False" Clicked="OnImportClicked" />
+        </VerticalStackLayout>
+        <CollectionView Grid.Row="4" x:Name="RowsCollection" EmptyView="Selecciona un CSV para ver la vista previa">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,8" Padding="12" BackgroundColor="{AppThemeBinding Light=White, Dark=#1D272C}" Stroke="{AppThemeBinding Light=#D9E1E5, Dark=#344149}" StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                            <Label Text="{Binding LineNumber, StringFormat='Fila {0}'}" FontSize="12" VerticalOptions="Start" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" LineBreakMode="TailTruncation" MaxLines="2" />
+                                <Label Text="{Binding CategoryName, StringFormat='Categoría: {0}'}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                                <Label Text="{Binding AmountsLabel}" FontSize="12" TextColor="{AppThemeBinding Light=#66757D, Dark=#AEBBC2}" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="{Binding StatusLabel}" FontSize="11" HorizontalTextAlignment="End" MaximumWidthRequest="145" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#26734D, Dark=#8FE0B2}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
